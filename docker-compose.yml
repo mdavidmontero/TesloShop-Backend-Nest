@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: postgres_shop
+    image: postgres:15.1
+    volumes:
+      - ./postgres-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=teslo
+      - POSTGRES_DB=shop
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - "5435:5432"
