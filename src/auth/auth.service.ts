@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  Get,
   Injectable,
   InternalServerErrorException,
   UnauthorizedException,
@@ -49,6 +50,12 @@ export class AuthService {
     if (!bcrypt.compareSync(password, user.password)) {
       throw new UnauthorizedException('Invalid email or password');
     }
+    return {
+      ...user,
+      token: this.getJwtToken({ id: user.id }),
+    };
+  }
+  async checkAuthStatus(user: User) {
     return {
       ...user,
       token: this.getJwtToken({ id: user.id }),
